@@ -1,0 +1,36 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: kdemo
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: gcr.io/s9-demo/kdemo:latest
+            resources:
+              requests:
+                memory: "128Mi"
+                cpu: "0.5"
+              limits:
+                memory: "512Mi"
+                cpu: "1"
+            env:
+            - name: RELEASE
+              value: "v0.0.1"
+            - name: OAUTH_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: kdemo
+                  key: OAUTH_CLIENT_ID
+            - name: OAUTH_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: kdemo
+                  key: OAUTH_CLIENT_SECRET
+            - name: GCP_PROJECT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: global-config
+                  key: project
