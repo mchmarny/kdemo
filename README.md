@@ -1,17 +1,16 @@
 # kdemo
 
-Basic Google OAuth2 implementation with [Firestore](https://cloud.google.com/firestore/) persistence at global scale
+Microservice demo showcasing Knative service request path access configuration and GCP service integration using:
+
+* [Firestore](https://cloud.google.com/firestore/) persistence at global scale
+* [Cloud Vision](https://cloud.google.com/vision/) pretrained vision models with AutoML Vision
+* [Knative](https://github.com/knative/docs) Kubernetes-based platform to build, deploy, and manage modern serverless workloads
+
+![Diagram](./static/img/overview.png)
 
 ## Demo
 
-https://auth.demo.knative.tech/
-
-## Setup
-
-Setup assumes you already have `gcloud` installed. If not, see [Installing Google Cloud SDK](https://cloud.google.com/sdk/install)
-
-
-> This readme is still a bit of work in progress so if you are finding something missing do take a look at the [Makefile](https://github.com/mchmarny/kdemo/blob/master/Makefile)
+https://kdemo.demo.knative.tech/
 
 ### Knative URL
 
@@ -82,8 +81,8 @@ Before we can deploy that service to Knative, we just need to create Kubernetes 
 
 ```shell
 kubectl create secret generic kdemo \
-    --from-literal=OAUTH_CLIENT_ID=$(DEMO_OAUTH_CLIENT_ID) \
-    --from-literal=OAUTH_CLIENT_SECRET=$(DEMO_OAUTH_CLIENT_SECRET)
+    --from-literal=OAUTH_CLIENT_ID=${OAUTH_CLIENT_ID} \
+    --from-literal=OAUTH_CLIENT_SECRET=${OAUTH_CLIENT_SECRET}
 ```
 
 Now in the `deploy/server.yaml` file update the `GCP_PROJECT_ID`
