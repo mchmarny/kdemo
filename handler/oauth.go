@@ -43,9 +43,12 @@ func getOAuthConfig(r *http.Request) *oauth2.Config {
 	}
 
 	// HTTPS or HTTP
-	proto := r.Header.Get("X-FORWARDED-PROTO")
+	proto := r.Header.Get("x-forwarded-proto")
 	if proto == "" {
 		proto = "http"
+	}
+	if util.MustGetEnv("FORCE_HTTPS", "NO") == "yes" {
+		proto = "https"
 	}
 
 	baseURL := fmt.Sprintf("%s://%s", proto, r.Host)

@@ -18,7 +18,13 @@ spec:
                 cpu: "1"
             env:
             - name: RELEASE
-              value: "v0.0.1"
+              value: "v0.0.2"
+            - name: KLOGO_SERVICE_URL
+              value: "http://klogo.demo.svc.cluster.local"
+            - name: KUSER_SERVICE_URL
+              value: "http://kuser.demo.svc.cluster.local"
+            - name: FORCE_HTTPS
+              value: "yes"
             - name: OAUTH_CLIENT_ID
               valueFrom:
                 secretKeyRef:
