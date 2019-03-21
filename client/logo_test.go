@@ -9,7 +9,7 @@ import (
 func TestLogoClient(t *testing.T) {
 
 	logURL := "https://storage.googleapis.com/kdemo-logos/0.png"
-	err, logo := GetLogoInfo(logURL)
+	logo, err := GetLogoInfo(logURL)
 	assert.Nil(t, err)
 	assert.NotNil(t, logo)
 

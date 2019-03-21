@@ -153,6 +153,13 @@ h5 {
   float: left;
 }
 
+#more-logo-link {
+  clear: both;
+  float: left;
+  color: #fff;
+  font-size: 0.8em;
+}
+
 #logo-button {
 	float: left;
 	text-decoration: none;

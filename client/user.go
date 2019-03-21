@@ -48,9 +48,21 @@ func GetUser(id string) (usr *message.KUser, err error) {
 
 // SaveUser provides client lib for KUser
 func SaveUser(usr *message.KUser) error {
-
     url := fmt.Sprintf("%s/user", userServiceURL)
-	b, err := json.Marshal(usr)
+	return postObject(url, usr)
+}
+
+
+// SaveUserEvent provides client lib for KUserEvent
+func SaveUserEvent(event *message.KUserEvent) error {
+    url := fmt.Sprintf("%s/event", userServiceURL)
+	return postObject(url, event)
+}
+
+
+func postObject(url string, data interface{}) error {
+
+	b, err := json.Marshal(data)
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(b))
 	req.Header.Set("Content-Type", "application/json")
 
@@ -63,7 +75,7 @@ func SaveUser(usr *message.KUser) error {
 
 	log.Printf("Response status: %s", resp.Status)
 	if resp.StatusCode != http.StatusOK {
-		return errors.New("Invalid response code from KUser service")
+		return errors.New("Invalid response code from service")
 	}
 
 	return nil
