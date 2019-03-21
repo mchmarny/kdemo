@@ -113,13 +113,14 @@ func OAuthCallbackHandler(w http.ResponseWriter, r *http.Request) {
 
 
 	usrData := &message.KUser{
-		ID: ,
-		Email: email,
+		ID: userID,
+		Email: email.(string),
 		Name: fmt.Sprintf("%s %s", dataMap["given_name"], dataMap["family_name"]),
 		Created: time.Now(),
 		Updated: time.Now(),
-		Picture: pic,
+		Picture: pic.(string),
 	}
+	log.Printf("User Data: %+v", usrData)
 
 	// TODO: Call service here
 	// save data
@@ -138,7 +139,7 @@ func OAuthCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	cookie := http.Cookie{
 		Name: userIDCookieName,
 		Path: "/",
-		Value: id,
+		Value: userID,
 		Expires: time.Now().Add(cookieDuration),
 	}
 	http.SetCookie(w, &cookie)
