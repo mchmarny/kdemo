@@ -1,10 +1,12 @@
 # kdemo
 
-Microservice demo showcasing Knative service request path access configuration and GCP service integration using:
+Microservice demo showcasing Knative service request path access configuration and GCP service integration using [Knative](https://github.com/knative/docs), Kubernetes-based platform to build, deploy, and manage modern serverless workloads
 
-* [Firestore](https://cloud.google.com/firestore/) persistence at global scale
-* [Cloud Vision](https://cloud.google.com/vision/) pretrained vision models with AutoML Vision
-* [Knative](https://github.com/knative/docs) Kubernetes-based platform to build, deploy, and manage modern serverless workloads
+This service uses:
+* [KUser Service](https://github.com/mchmarny/kuser) Knative User state management service backed by Cloud Firestore API
+  * [Firestore](https://cloud.google.com/firestore/) persistence at global scale
+* [KLogo Service](https://github.com/mchmarny/klogo) Knative service detecting company from logo images using Cloud Vision API
+  * [Cloud Vision](https://cloud.google.com/vision/) pretrained vision models with AutoML Vision
 
 ![Diagram](./static/img/overview.png)
 
@@ -35,6 +37,18 @@ For ease of use, export the copied client `id` as `DEMO_OAUTH_CLIENT_ID` and `se
 
 > You will also have to verify the domain ownership. More on that [here](https://support.google.com/cloud/answer/6158849?hl=en#authorized-domains)
 
+# Public/Private Services in Knative
+
+In this demo we exposed publically only the front end (UI) service. The backend services are decorated with `visibility: cluster-local` label which allows other services in the same cluster to reach them using `http://[service].[namepsace].svc.cluster.local` url while preventing external access.
+
+```yaml
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: kuser
+  labels:
+    serving.knative.dev/visibility: cluster-local
+```
 
 ### Google Cloud Firestore
 
@@ -121,19 +135,6 @@ auth-00002-deployment-5645f48b4d-mb24j        3/3       Running   0          4h
 ```
 
 You should be able to test the app now in browser using the `URL` you defined above.
-
-# Public/Private Services in Knative
-
-In this demo we exposed publically only the front end (UI) service. The backend services are decorated with `visibility: cluster-local` label which allows other services in the same cluster to reach them using `http://[service].[namepsace].svc.cluster.local` url while preventing external access.
-
-```yaml
-apiVersion: serving.knative.dev/v1alpha1
-kind: Service
-metadata:
-  name: kuser
-  labels:
-    serving.knative.dev/visibility: cluster-local
-```
 
 ## Disclaimer
 
