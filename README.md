@@ -8,7 +8,7 @@ This service uses:
 * [KLogo Service](https://github.com/mchmarny/klogo) Knative service detecting company from logo images using Cloud Vision API
   * [Cloud Vision](https://cloud.google.com/vision/) pretrained vision models with AutoML Vision
 
-![Diagram](./static/img/overview.png)
+![Diagram](./static/img/overview2.png)
 
 ## Demo
 
