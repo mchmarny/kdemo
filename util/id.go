@@ -54,5 +54,5 @@ func MakeUUID() string {
 	if err != nil {
 		log.Fatalf("Error while getting id: %v\n", err)
 	}
-	return id.String()
+	return idPrefix + id.String()
 }

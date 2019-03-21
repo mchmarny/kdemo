@@ -25,6 +25,7 @@ func main() {
 	mux.HandleFunc("/auth/callback", handler.OAuthCallbackHandler)
 	mux.HandleFunc("/auth/logout", handler.LogOutHandler)
 	mux.HandleFunc("/view", handler.ViewHandler)
+	mux.HandleFunc("/logo", handler.LogoHandler)
 	mux.HandleFunc("/_health", func(w http.ResponseWriter, _ *http.Request) {
 		fmt.Fprint(w, "ok")
 	})

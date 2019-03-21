@@ -1,10 +1,14 @@
 # Assumes following env vars set
 #  * GCP_PROJECT - ID of your project
-#  * KDEMO_OAUTH_CLIENT_ID - Google OAuth2 Client ID
-#  * KDEMO_OAUTH_CLIENT_SECRET - Google OAuth2 Client Secret
+#  * OAUTH_CLIENT_ID - Google OAuth2 Client ID
+#  * OAUTH_CLIENT_SECRET - Google OAuth2 Client Secret
+#  * KUSER_SERVICE_URL - Kuser endpoint service ID (else default to local)
 
 test:
 	go test ./... -v
+
+run:
+	go run *.go -v
 
 deps:
 	go mod tidy

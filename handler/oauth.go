@@ -16,7 +16,9 @@ import (
 	"golang.org/x/oauth2/google"
 
 	"github.com/mchmarny/kdemo/util"
+	"github.com/mchmarny/kdemo/client"
 	"github.com/mchmarny/kuser/message"
+
 
 )
 
@@ -110,8 +112,6 @@ func OAuthCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	userID := util.MakeID(email.(string))
 	log.Printf("UserID: %s", userID)
 
-
-
 	usrData := &message.KUser{
 		ID: userID,
 		Email: email.(string),
@@ -122,18 +122,12 @@ func OAuthCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Printf("User Data: %+v", usrData)
 
-	// TODO: Call service here
-	// save data
-	// err = stores.SaveData(r.Context(), id, dataMap)
-	// if err != nil {
-	// 	log.Printf("Error while saving data: %v", err)
-	// 	ErrorHandler(w, r, err, http.StatusInternalServerError)
-	// 	return
-	// }
-
-	// last auth date
-	dataMap["last_auth"] = time.Now()
-
+	err = client.SaveUser(usrData)
+	if err != nil {
+		log.Printf("Error while saving data: %v", err)
+		ErrorHandler(w, r, err, http.StatusInternalServerError)
+		return
+	}
 
 	// set cookie for 30 days
 	cookie := http.Cookie{

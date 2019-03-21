@@ -18,9 +18,16 @@ body {
 h3 {
 	color: #fff;
 	margin: 0;
-	font-weight: bold;
-	font-size: 3em;
+	font-size: 1.1em;
 	margin: 10px 0 0 0;
+}
+
+h5 {
+	color: #fff;
+	margin: 0;
+	font-size: 0.9em;
+	margin: 10px 0 0 0;
+	font-weight: normal;
 }
 
 #wrapper {
@@ -42,7 +49,7 @@ h3 {
 
 #page-header-title {
 	color: #999;
-	font-size: 5em;
+	font-size: 3em;
 }
 
 #middle-section {
@@ -56,7 +63,7 @@ h3 {
 	color: #fff;
 	margin: 0;
 	padding: 0;
-	font-size: 1.2em;
+	font-size: 0.9em;
 }
 
 #middle-section .logout {
@@ -83,7 +90,7 @@ h3 {
   	color: #fff;
   	padding: 4px 6px 4px 6px;
 	border: 2px solid #fff;
-	font-size: 1.4em;
+	font-size: 1em;
 }
 
 #page-footer {
@@ -91,4 +98,84 @@ h3 {
 	margin: 50px 0 0 0;
 	color: #666;
 	font-size: 1em;
+}
+
+
+
+#middle-section table {
+	width: 100%;
+	margin: 5px;
+	text-align: center;
+}
+
+.left-col {
+	width: 40%;
+	text-align: center;
+}
+
+.right-col {
+	width: 60%;
+	text-align: center;
+}
+
+#logos {
+	margin-top: 20px;
+}
+
+#logos img {
+	width: 50px;
+	height: 50px;
+	border: 1px;
+}
+
+#logos h5 {
+  clear: both;
+  float: left;
+}
+
+.logos {
+  clear: both;
+}
+
+.logo {
+  float: left;
+  width: 50px;
+  padding: 5px;
+}
+
+#logo-form {
+  clear: both;
+  float: left;
+}
+
+#logo-result {
+  clear: both;
+  float: left;
+}
+
+#logo-button {
+	float: left;
+	text-decoration: none;
+	background-color: #0865ad;
+  	color: #fff;
+  	padding: 4px 6px 4px 6px;
+	border: 2px solid #fff;
+	font-size: 1em;
+	margin: 5px;
+}
+
+#logo-url {
+	float: left;
+	background-color: #ffffff;
+  	color: #0865ad;
+  	padding: 4px 6px 4px 6px;
+	border: 2px solid #fff;
+	font-size: 1em;
+	width: 500px;
+	margin: 5px;
+}
+
+#logo-result-text {
+	font-size: 1em;
+	color: #fff;
 }

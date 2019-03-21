@@ -2,17 +2,36 @@ package client
 
 import (
 	"testing"
-	"log"
+	"time"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/mchmarny/kuser/message"
 )
 
-func TestRestHandler(t *testing.T) {
+func TestUserClient(t *testing.T) {
 
-	url := "http://kuser.demo.knative.tech/user/handler-123"
-	usr, err := getUserFromService(url)
+	usrIn := &message.KUser{
+		ID: "test-user-ok-to-delete",
+		Email: "test-user@domain.com",
+		Name: "Test User",
+		Created: time.Now(),
+		Updated: time.Now(),
+		Picture: "http://my.pic.com/123",
+	}
 
+	err := SaveUser(usrIn)
 	assert.Nil(t, err)
-	assert.NotNil(t, usr)
-	log.Printf(usr.ID)
+
+	usrOut, err := GetUser(usrIn.ID)
+	assert.Nil(t, err)
+	assert.NotNil(t, usrOut)
+
+}
+
+func TestUserClientWithInvalidUser(t *testing.T) {
+
+	usr, err := GetUser("badID")
+
+	assert.NotNil(t, err)
+	assert.Nil(t, usr)
 }

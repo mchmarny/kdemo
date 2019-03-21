@@ -5,18 +5,82 @@
 
 <div id="middle-section">
 
-    <!-- Middle (Authed) -->
-    <h3>{{.name}}</h3>
-    <div class="pic">
-        <img src="{{.picture}}" width="100" />
-    </div>
 
-    <div class="email">
-        Signed in as: {{.email}}
-    </div>
-    <div class="logout">
-        <a href="/auth/logout" id="logout-button">Sign Out</a>
-    </div>
+    <table border=0 width="100%">
+        <tr>
+            <td class="left-col">
+                <!-- Left side -->
+                <h3>{{.name}}</h3>
+                <div class="pic">
+                    <img src="{{.pic}}" />
+                </div>
+
+                <div class="email">
+                    {{.email}}
+                </div>
+                <div class="logout">
+                    <a href="/auth/logout" id="logout-button">Sign Out</a>
+                </div>
+
+            </td>
+            <td class="right-col">
+
+                <form id="logo-form">
+
+                    <input type="text" id="logo-url" value="enter logo url here">
+
+                    <a href="#" id="logo-button">Identify</a>
+
+                </form>
+
+                <div id="logo-result">
+                    <div id="logo-result-text"></div>
+                </div>
+
+                <div id="logos">
+
+                    <h5>Samples</h5>
+
+                    <div class="logos">
+
+                        <div class="logo">
+                            <img src="https://storage.googleapis.com/kdemo-logos/0.png">
+                        </div>
+
+                        <div class="logo">
+                            <img src="https://storage.googleapis.com/kdemo-logos/10.png">
+                        </div>
+
+                        <div class="logo">
+                            <img src="https://storage.googleapis.com/kdemo-logos/11.png">
+                        </div>
+
+                        <div class="logo">
+                            <img src="https://storage.googleapis.com/kdemo-logos/4.png">
+                        </div>
+
+                        <div class="logo">
+                            <img src="https://storage.googleapis.com/kdemo-logos/6.png">
+                        </div>
+
+                        <div class="logo">
+                            <img src="https://storage.googleapis.com/kdemo-logos/7.png">
+                        </div>
+
+                        <div class="logo">
+                            <img src="https://storage.googleapis.com/kdemo-logos/8.png">
+                        </div>
+
+                        <div class="logo">
+                            <img src="https://storage.googleapis.com/kdemo-logos/9.png">
+                        </div>
+
+                    </div>
+                </div>
+
+            </td>
+        </tr>
+    </table>
 
 </div>
 
