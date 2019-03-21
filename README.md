@@ -122,6 +122,19 @@ auth-00002-deployment-5645f48b4d-mb24j        3/3       Running   0          4h
 
 You should be able to test the app now in browser using the `URL` you defined above.
 
+# Public/Private Services in Knative
+
+In this demo we exposed publically only the front end (UI) service. The backend services are decorated with `visibility: cluster-local` label which allows other services in the same cluster to reach them using `http://[service].[namepsace].svc.cluster.local` url while preventing external access.
+
+```yaml
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: kuser
+  labels:
+    serving.knative.dev/visibility: cluster-local
+```
+
 ## Disclaimer
 
 This is my personal project and it does not represent my employer. I take no responsibility for issues caused by this code. I do my best to ensure that everything works, but if something goes wrong, my apologies is all you will get.
