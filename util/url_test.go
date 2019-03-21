@@ -8,7 +8,7 @@ import (
 func TestServerSizeResizePlusPic(t *testing.T) {
 
 	testImage := "https://lh6.googleusercontent.com/-65SFt9rUmD0/AAAAAAAAAAI/AAAAAAAB698/8pIgz0b5NG8/photo.jpg"
-	expectedImg := "https://lh6.googleusercontent.com/-65SFt9rUmD0/AAAAAAAAAAI/AAAAAAAB698/8pIgz0b5NG8/s200/photo.jpg"
+	expectedImg := "https://lh6.googleusercontent.com/-65SFt9rUmD0/AAAAAAAAAAI/AAAAAAAB698/8pIgz0b5NG8/s100/photo.jpg"
 
 	sizedImg := ServerSizeResizePlusPic(testImage, 100)
 	log.Printf("Sized image: %s", sizedImg)

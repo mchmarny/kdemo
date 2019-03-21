@@ -16,6 +16,7 @@ import (
 	"golang.org/x/oauth2/google"
 
 	"github.com/mchmarny/kdemo/util"
+	"github.com/mchmarny/kuser/message"
 
 )
 
@@ -99,14 +100,26 @@ func OAuthCallbackHandler(w http.ResponseWriter, r *http.Request) {
 
 	email := dataMap["email"]
 	log.Printf("Email: %s", email)
-	id := util.MakeID(email.(string))
 
 	//server resize image
 	pic := dataMap["picture"]
 	if pic != nil {
-		dataMap["picture"] = util.ServerSizeResizePlusPic(pic.(string), defaultPicSize)
+		pic = util.ServerSizeResizePlusPic(pic.(string), defaultPicSize)
 	}
 
+	userID := util.MakeID(email.(string))
+	log.Printf("UserID: %s", userID)
+
+
+
+	usrData := &message.KUser{
+		ID: ,
+		Email: email,
+		Name: fmt.Sprintf("%s %s", dataMap["given_name"], dataMap["family_name"]),
+		Created: time.Now(),
+		Updated: time.Now(),
+		Picture: pic,
+	}
 
 	// TODO: Call service here
 	// save data
