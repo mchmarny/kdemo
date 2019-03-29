@@ -14,14 +14,14 @@ import (
 // LogoHandler handles posted queries
 func LogoHandler(w http.ResponseWriter, r *http.Request) {
 
+	w.Header().Set("Content-Type", "application/json")
+
 	uid := getCurrentUserID(r)
 	if uid == "" {
 		log.Println("User not authenticated")
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-
-	w.Header().Set("Content-Type", "application/json")
 
 	if r.Body == nil {
 		log.Println("Nil request body")
