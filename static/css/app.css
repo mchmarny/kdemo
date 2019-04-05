@@ -182,7 +182,11 @@ h5 {
 	margin: 5px;
 }
 
+#logo-result {
+	height: 100px;
+}
+
 #logo-result-text {
-	font-size: 1em;
+	font-size: 2em;
 	color: #fff;
 }

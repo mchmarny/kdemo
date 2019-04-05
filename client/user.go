@@ -24,6 +24,7 @@ var (
 func GetUser(id string) (usr *message.KUser, err error) {
 
 	url := fmt.Sprintf("%s/user/%s", userServiceURL, id)
+	log.Printf("Getting user from: %s", url)
 	req, err := http.NewRequest("GET", url, nil)
 	req.Header.Set("Content-Type", "application/json")
 
@@ -48,7 +49,8 @@ func GetUser(id string) (usr *message.KUser, err error) {
 
 // SaveUser provides client lib for KUser
 func SaveUser(usr *message.KUser) error {
-    url := fmt.Sprintf("%s/user", userServiceURL)
+	url := fmt.Sprintf("%s/user", userServiceURL)
+	log.Printf("Saving user to: %s", url)
 	return postObject(url, usr)
 }
 
