@@ -18,6 +18,11 @@ image:
 		--project ${GCP_PROJECT} \
 		--tag gcr.io/${GCP_PROJECT}/kdemo
 
+sample-image:
+	gcloud builds submit \
+		--project knative-samples \
+		--tag gcr.io/knative-samples/kdemo
+
 secrets:
 	# kubectl delete secret kdemo -n demo
 	kubectl create secret generic kdemo -n demo \
