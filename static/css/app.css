@@ -78,10 +78,12 @@ h5 {
 	margin: 10px;
 }
 
-#middle-section img {
+#profile-pic {
 	border: 2px solid #fff;
 	margin: 0;
 	padding: 0;
+	width: 200px;
+	height: 200px;
 }
 
 #logout-button {

@@ -1,40 +1,37 @@
 package handler
 
 import (
-	"net/http"
+	"context"
+	"crypto/rand"
+	"encoding/base64"
+	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
-	"context"
 	"log"
-	"encoding/base64"
-	"crypto/rand"
-	"encoding/json"
+	"net/http"
 	"time"
-	"errors"
 
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 
-	"github.com/mchmarny/kdemo/util"
 	"github.com/mchmarny/kdemo/client"
+	"github.com/mchmarny/kdemo/util"
 	"github.com/mchmarny/kuser/message"
-
-
 )
 
 const (
-	googleOAuthURL = "https://www.googleapis.com/oauth2/v2/userinfo?access_token="
-	stateCookieName = "authstate"
+	googleOAuthURL   = "https://www.googleapis.com/oauth2/v2/userinfo?access_token="
+	stateCookieName  = "authstate"
 	userIDCookieName = "uid"
-	defaultPicSize = 100
+	defaultPicSize   = 100
 )
 
 var (
 	longTimeAgo    = time.Duration(3650 * 24 * time.Hour)
 	cookieDuration = time.Duration(30 * 24 * time.Hour)
-	oauthConfig *oauth2.Config
+	oauthConfig    *oauth2.Config
 )
-
 
 func getOAuthConfig(r *http.Request) *oauth2.Config {
 
@@ -66,8 +63,6 @@ func getOAuthConfig(r *http.Request) *oauth2.Config {
 	return oauthConfig
 
 }
-
-
 
 // OAuthLoginHandler handles oauth login
 func OAuthLoginHandler(w http.ResponseWriter, r *http.Request) {
@@ -106,19 +101,18 @@ func OAuthCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	email := dataMap["email"]
 	log.Printf("Email: %s", email)
 
-	//server resize image
 	pic := dataMap["picture"]
 	if pic != nil {
-		pic = util.ServerSizeResizePlusPic(pic.(string), defaultPicSize)
+		pic = pic.(string)
 	}
 
 	userID := util.MakeID(email.(string))
 	log.Printf("UserID: %s", userID)
 
 	usrData := &message.KUser{
-		ID: userID,
-		Email: email.(string),
-		Name: fmt.Sprintf("%s %s", dataMap["given_name"], dataMap["family_name"]),
+		ID:      userID,
+		Email:   email.(string),
+		Name:    fmt.Sprintf("%s %s", dataMap["given_name"], dataMap["family_name"]),
 		Created: time.Now(),
 		Updated: time.Now(),
 		Picture: pic.(string),
@@ -134,9 +128,9 @@ func OAuthCallbackHandler(w http.ResponseWriter, r *http.Request) {
 
 	// set cookie for 30 days
 	cookie := http.Cookie{
-		Name: userIDCookieName,
-		Path: "/",
-		Value: userID,
+		Name:    userIDCookieName,
+		Path:    "/",
+		Value:   userID,
 		Expires: time.Now().Add(cookieDuration),
 	}
 	http.SetCookie(w, &cookie)
@@ -146,8 +140,6 @@ func OAuthCallbackHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
-
-
 // LogOutHandler resets cookie and redirects to index page
 func LogOutHandler(w http.ResponseWriter, r *http.Request) {
 
@@ -155,10 +147,10 @@ func LogOutHandler(w http.ResponseWriter, r *http.Request) {
 	log.Printf("User logging out: %s", uid)
 
 	cookie := http.Cookie{
-		Name: userIDCookieName,
-		Path: "/",
-		Value: "",
-		MaxAge: -1,
+		Name:    userIDCookieName,
+		Path:    "/",
+		Value:   "",
+		MaxAge:  -1,
 		Expires: time.Now().Add(-longTimeAgo),
 	}
 
@@ -172,8 +164,8 @@ func generateStateOauthCookie(w http.ResponseWriter) string {
 	rand.Read(b)
 	state := base64.URLEncoding.EncodeToString(b)
 	cookie := http.Cookie{
-		Name: stateCookieName,
-		Value: state,
+		Name:    stateCookieName,
+		Value:   state,
 		Expires: time.Now().Add(cookieDuration),
 	}
 	http.SetCookie(w, &cookie)

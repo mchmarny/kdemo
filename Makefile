@@ -14,14 +14,11 @@ deps:
 	go mod tidy
 
 image:
+	go mod tidy
+	go mod vendor
 	gcloud builds submit \
-		--project ${GCP_PROJECT} \
-		--tag gcr.io/${GCP_PROJECT}/kdemo
-
-sample-image:
-	gcloud builds submit \
-		--project knative-samples \
-		--tag gcr.io/knative-samples/kdemo
+		--project "${GCP_PROJECT}-public" \
+		--tag "gcr.io/${GCP_PROJECT}-public/kdemo:0.2.5"
 
 secrets:
 	# kubectl delete secret kdemo -n demo
@@ -34,4 +31,6 @@ config:
 
 service:
 	kubectl apply -f deployment/service.yaml -n demo
+
+
 

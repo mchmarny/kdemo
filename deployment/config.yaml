@@ -4,4 +4,4 @@ metadata:
   name: global-config
   namespace: demo
 data:
-  project: "s9-demo"
+  project: "cloudylabs"
