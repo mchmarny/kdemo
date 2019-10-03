@@ -1,0 +1,30 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: kdemo
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: gcr.io/cloudylabs-public/logo-demo:1.0.1
+            env:
+              - name: RELEASE
+                value: "v0.2.3-manual"
+              - name: LOGO_SERVICE_URL
+                value: "http://logo.demo.svc.cluster.local"
+              - name: USER_SERVICE_URL
+                value: "http://user.demo.svc.cluster.local"
+              - name: FORCE_HTTPS
+                value: "yes"
+              - name: OAUTH_CLIENT_ID
+                valueFrom:
+                  secretKeyRef:
+                    name: logo-demo
+                    key: OAUTH_CLIENT_ID
+              - name: OAUTH_CLIENT_SECRET
+                valueFrom:
+                  secretKeyRef:
+                    name: logo-demo
+                    key: OAUTH_CLIENT_SECRET

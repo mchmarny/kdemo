@@ -3,12 +3,12 @@ package handler
 import (
 	"encoding/json"
 	"log"
-	"time"
 	"net/http"
+	"time"
 
 	"github.com/mchmarny/kdemo/client"
 	"github.com/mchmarny/kdemo/util"
-    "github.com/mchmarny/kuser/message"
+	"github.com/mchmarny/kuser/message"
 )
 
 // LogoHandler handles posted queries
@@ -48,12 +48,12 @@ func LogoHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	event := &message.KUserEvent{
-		ID: util.MakeUUID(),
-		On: time.Now(),
+		ID:     util.MakeUUID(),
+		On:     time.Now(),
 		UserID: uid,
 		Data: []*message.KDataItem{
-			&message.KDataItem{ Key:"logo-request", Value: imageURL },
-			&message.KDataItem{ Key:"logo-response", Value: logo.Description },
+			&message.KDataItem{Key: "logo-request", Value: imageURL},
+			&message.KDataItem{Key: "logo-response", Value: logo.Description},
 		},
 	}
 
@@ -63,7 +63,5 @@ func LogoHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-
-
 
 }

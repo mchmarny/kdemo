@@ -8,16 +8,16 @@ import (
 	"log"
 	"net/http"
 
-    "github.com/mchmarny/kuser/message"
-    "github.com/mchmarny/kdemo/util"
+	ev "github.com/mchmarny/gcputil/env"
+	"github.com/mchmarny/kuser/message"
 )
 
 const (
-	localUserServiceURL = "http://kuser.demo.svc.cluster.local"
+	localUserServiceURL = "http://user.demo.svc.cluster.local"
 )
 
 var (
-	userServiceURL  = util.MustGetEnv("KUSER_SERVICE_URL", localUserServiceURL)
+	userServiceURL = ev.MustGetEnvVar("USER_SERVICE_URL", localUserServiceURL)
 )
 
 // GetUser provides client lib for KUser
@@ -54,13 +54,11 @@ func SaveUser(usr *message.KUser) error {
 	return postObject(url, usr)
 }
 
-
 // SaveUserEvent provides client lib for KUserEvent
 func SaveUserEvent(event *message.KUserEvent) error {
-    url := fmt.Sprintf("%s/event", userServiceURL)
+	url := fmt.Sprintf("%s/event", userServiceURL)
 	return postObject(url, event)
 }
-
 
 func postObject(url string, data interface{}) error {
 

@@ -7,23 +7,24 @@ import (
 	"log"
 	"net/http"
 
-    "github.com/mchmarny/klogo/message"
-    "github.com/mchmarny/kdemo/util"
+	ev "github.com/mchmarny/gcputil/env"
+	"github.com/mchmarny/kdemo/util"
+	"github.com/mchmarny/klogo/message"
 )
 
 const (
-	localLogoServiceURL = "http://klogo.demo.svc.cluster.local"
+	localLogoServiceURL = "http://logo.demo.svc.cluster.local"
 )
 
 var (
-	logoServiceURL  = util.MustGetEnv("KLOGO_SERVICE_URL", localLogoServiceURL)
+	logoServiceURL = ev.MustGetEnvVar("LOGO_SERVICE_URL", localLogoServiceURL)
 )
 
 // GetLogoInfo provides client lib for KLogo
 func GetLogoInfo(url string) (logo *message.LogoResponse, err error) {
 
 	imgReg := &message.LogoRequest{
-		ID: util.MakeUUID(),
+		ID:       util.MakeUUID(),
 		ImageURL: url,
 	}
 

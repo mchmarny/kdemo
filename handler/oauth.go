@@ -15,6 +15,7 @@ import (
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 
+	ev "github.com/mchmarny/gcputil/env"
 	"github.com/mchmarny/kdemo/client"
 	"github.com/mchmarny/kdemo/util"
 	"github.com/mchmarny/kuser/message"
@@ -44,7 +45,7 @@ func getOAuthConfig(r *http.Request) *oauth2.Config {
 	if proto == "" {
 		proto = "http"
 	}
-	if util.MustGetEnv("FORCE_HTTPS", "NO") == "yes" {
+	if ev.MustGetEnvVar("FORCE_HTTPS", "NO") == "yes" {
 		proto = "https"
 	}
 
@@ -54,8 +55,8 @@ func getOAuthConfig(r *http.Request) *oauth2.Config {
 	// OAuth
 	oauthConfig = &oauth2.Config{
 		RedirectURL:  fmt.Sprintf("%s/auth/callback", baseURL),
-		ClientID:     util.MustGetEnv("OAUTH_CLIENT_ID", ""),
-		ClientSecret: util.MustGetEnv("OAUTH_CLIENT_SECRET", ""),
+		ClientID:     ev.MustGetEnvVar("OAUTH_CLIENT_ID", ""),
+		ClientSecret: ev.MustGetEnvVar("OAUTH_CLIENT_SECRET", ""),
 		Scopes:       []string{"https://www.googleapis.com/auth/userinfo.email"},
 		Endpoint:     google.Endpoint,
 	}

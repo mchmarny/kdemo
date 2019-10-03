@@ -1,29 +1,31 @@
-# cloud.google.com/go v0.35.1
+# cloud.google.com/go v0.46.3
 cloud.google.com/go/compute/metadata
 # github.com/davecgh/go-spew v1.1.1
 github.com/davecgh/go-spew/spew
-# github.com/golang/protobuf v1.2.0
+# github.com/golang/protobuf v1.3.2
 github.com/golang/protobuf/proto
 # github.com/google/uuid v1.1.1
 github.com/google/uuid
-# github.com/mchmarny/klogo v0.0.0-20190320170250-cfb9d80fbf2a
+# github.com/mchmarny/gcputil v0.2.1
+github.com/mchmarny/gcputil/env
+# github.com/mchmarny/klogo v0.0.0-20191003133520-03749f8f2c50
 github.com/mchmarny/klogo/message
-# github.com/mchmarny/kuser v0.0.0-20190321022719-33ed821674f3
+# github.com/mchmarny/kuser v0.0.0-20191003120440-3f846669c3e6
 github.com/mchmarny/kuser/message
 # github.com/pmezard/go-difflib v1.0.0
 github.com/pmezard/go-difflib/difflib
-# github.com/stretchr/testify v1.3.0
+# github.com/stretchr/testify v1.4.0
 github.com/stretchr/testify/assert
-# golang.org/x/net v0.0.0-20190125091013-d26f9f9a57f3
+# golang.org/x/net v0.0.0-20190827160401-ba9fcec4b297
 golang.org/x/net/context
 golang.org/x/net/context/ctxhttp
-# golang.org/x/oauth2 v0.0.0-20190130055435-99b60b757ec1
+# golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
 golang.org/x/oauth2
 golang.org/x/oauth2/google
 golang.org/x/oauth2/internal
 golang.org/x/oauth2/jws
 golang.org/x/oauth2/jwt
-# google.golang.org/appengine v1.4.0
+# google.golang.org/appengine v1.6.1
 google.golang.org/appengine
 google.golang.org/appengine/internal
 google.golang.org/appengine/internal/app_identity
@@ -34,3 +36,5 @@ google.golang.org/appengine/internal/modules
 google.golang.org/appengine/internal/remote_api
 google.golang.org/appengine/internal/urlfetch
 google.golang.org/appengine/urlfetch
+# gopkg.in/yaml.v2 v2.2.4
+gopkg.in/yaml.v2

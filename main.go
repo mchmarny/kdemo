@@ -3,12 +3,19 @@ package main
 import (
 	"fmt"
 	"log"
+	"net"
 	"net/http"
+	"os"
 
 	"github.com/mchmarny/kdemo/handler"
-	"github.com/mchmarny/kdemo/util"
+
+	ev "github.com/mchmarny/gcputil/env"
 )
 
+var (
+	logger = log.New(os.Stdout, "", 0)
+	port   = ev.MustGetEnvVar("PORT", "8080")
+)
 
 func main() {
 
@@ -17,7 +24,7 @@ func main() {
 
 	// Static
 	mux.Handle("/static/", http.StripPrefix("/static/",
-		  http.FileServer(http.Dir("static"))))
+		http.FileServer(http.Dir("static"))))
 
 	// Handlers
 	mux.HandleFunc("/", handler.DefaultHandler)
@@ -31,9 +38,9 @@ func main() {
 	})
 
 	// Server
-	port := util.MustGetEnv("PORT", "8080")
+	addr := net.JoinHostPort("0.0.0.0", port)
 	server := &http.Server{
-		Addr:    fmt.Sprintf(":%s", port),
+		Addr:    addr,
 		Handler: mux,
 	}
 

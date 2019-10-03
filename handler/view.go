@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/mchmarny/kdemo/util"
+	ev "github.com/mchmarny/gcputil/env"
 	"github.com/mchmarny/kdemo/client"
 )
 
@@ -30,7 +30,7 @@ func ViewHandler(w http.ResponseWriter, r *http.Request) {
 	data["name"] = usr.Name
 	data["email"] = usr.Email
 	data["pic"] = usr.Picture
-	data["version"] = util.MustGetEnv("RELEASE", "NOT SET")
+	data["version"] = ev.MustGetEnvVar("RELEASE", "NOT SET")
 
 	log.Printf("Data: %v", data)
 
